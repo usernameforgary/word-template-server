@@ -5,5 +5,6 @@ const router = express.Router()
 
 router.post('/add', controller.saveTag)
 router.get('/list_all', controller.getAllTags)
+router.post('/delete', controller.deleteTagById)
 
 module.exports = router

@@ -1,4 +1,4 @@
-const { saveTag, getAllTags } = require('../repositories/tags')
+const { saveTag, getAllTags, updateById } = require('../repositories/tags')
 
 exports.saveTag = async(req, res) => {
   const formData = req.body
@@ -26,3 +26,16 @@ exports.getAllTags = async(req, res) => {
   }
 }
 
+exports.deleteTagById = async(req, res) => {
+  try{
+    const id = req.body.tagId
+    if(!id) {
+      res.preconditionFailed(`Delete tag error, No id provide`)
+      return
+    }
+    const updatedTag = await updateById(id, {is_active: false}) 
+    res.success(updatedTag)
+  } catch(e) {
+    res.preconditionFailed(`Delete tag error, db error: ${e.message || e}`)
+  }
+}

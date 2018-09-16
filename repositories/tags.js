@@ -18,8 +18,15 @@ const getTagByIds = (ids) => {
   })
 }
 
+const updateById = (id, updateFields) => {
+  return Tag.findOneAndUpdate({_id: mongoose.Types.ObjectId(id)}, updateFields, {
+    returnNewDocument: true
+  })
+}
+
 module.exports = {
   saveTag,
   getAllTags,
   getTagByIds,
+  updateById,
 }
